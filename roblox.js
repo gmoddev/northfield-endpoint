@@ -1,14 +1,12 @@
-/// <reference types="node" />
-
-import noblox from 'noblox.js';
-import dotenv from 'dotenv';
+const noblox = require('noblox.js');
+const dotenv = require('dotenv');
 
 dotenv.config();
 
 const robloxCookie = process.env.ROBLOX_COOKIE || '';
 noblox.setCookie(robloxCookie);
 
-export async function robloxrank(userId: number, group: number, rank: number): Promise<void> {
+async function robloxrank(userId, group, rank) {
   try {
     await noblox.setRank(group, userId, rank);
   } catch (error) {
@@ -17,7 +15,7 @@ export async function robloxrank(userId: number, group: number, rank: number): P
   }
 }
 
-export async function robloxkick(userId: number, group: number): Promise<void> {
+async function robloxkick(userId, group) {
   try {
     await noblox.exile(group, userId);
   } catch (error) {
@@ -25,3 +23,8 @@ export async function robloxkick(userId: number, group: number): Promise<void> {
     throw error;
   }
 }
+
+module.exports = {
+  robloxrank,
+  robloxkick,
+};
