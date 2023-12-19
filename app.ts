@@ -22,7 +22,7 @@ app.use(limiter);
 app.post('/rank-up', async (req, res) => {
   const { userId,group,rank, permissionKey } = req.body;
 
-  if (permissionKey !== 'Z.,>[bu9r?;@ye,z%M-`{Wp5~AC4_sgN</#*!q2VLHw') {
+  if (permissionKey !== process.env.per_key) {
     return res.status(403).json({ error: 'Forbidden' });
   }
 
@@ -38,7 +38,7 @@ app.post('/rank-up', async (req, res) => {
 app.post('/kick-user', async (req, res) => {
   const { userId,group, permissionKey } = req.body;
 
-  if (permissionKey !== 'Z.,>[bu9r?;@ye,z%M-`{Wp5~AC4_sgN</#*!q2VLHw') {
+  if (permissionKey !== process.env.per_key) {
     return res.status(403).json({ error: 'Forbidden' });
   }
 
