@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(limiter);
 
+// Frontend
 app.post('/rank-up', async (req, res) => {
   const { userId,group,rank, permissionKey } = req.body;
 
@@ -49,6 +50,7 @@ app.post('/kick-user', async (req, res) => {
   }
 });
 
+// App start
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
