@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Astro-Network-Main/northwood_endpoint.git"
+    "url": "git+https://github.com/Astro-Network-Main/northfield-endpoint.git"
   },
   "author": "not_lowest",
   "license": "CC-BY-ND-4.0",
   "bugs": {
-    "url": "https://github.com/Astro-Network-Main/northwood_endpoint/issues"
+    "url": "https://github.com/northfield-endpoint/issues"
   },
-  "homepage": "https://github.com/Astro-Network-Main/northwood_endpoint#readme",
+  "homepage": "https://github.com/northfield-endpoint/#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "dotenv": "^10.0.0",
