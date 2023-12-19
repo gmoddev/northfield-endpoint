@@ -4,6 +4,7 @@ import rateLimit from 'express-rate-limit';
 import bodyParser from 'body-parser';
 import { rankUpUser, kickUser } from './roblox.ts';
 
+// Consts
 const app = express();
 const port = 3000;
 
