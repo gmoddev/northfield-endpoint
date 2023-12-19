@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import bodyParser from 'body-parser';
-import { rankUpUser, kickUser } from './roblox.ts';
+import { robloxrank, robloxkick } from './roblox.ts';
 import { banUser, unbanUser, warnUser } from './sql.ts';
 
 // Consts
@@ -28,7 +28,7 @@ app.post('/rank-up', async (req, res) => {
   }
 
   try {
-    await rankUpUser(userId,group,rank);
+    await robloxrank(userId,group,rank);
     res.json({ success: true, message: 'User ranked up successfully' });
   } catch (error) {
     console.error(error);
@@ -44,7 +44,7 @@ app.post('/kick-user', async (req, res) => {
   }
 
   try {
-    await kickUser(userId,group);
+    await robloxkick(userId,group);
     res.json({ success: true, message: 'User kicked successfully' });
   } catch (error) {
     console.error(error);
@@ -53,7 +53,7 @@ app.post('/kick-user', async (req, res) => {
 });
 
 // SQL Actions
-app.post('/ban-user', async (req, res) => {
+app.post('/ban-userlog', async (req, res) => {
   const { userId,time,reason, permissionKey } = req.body;
 
   if (permissionKey !== process.env.per_key) {
@@ -68,7 +68,7 @@ app.post('/ban-user', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-app.post('/unban-user', async (req, res) => {
+app.post('/unban-userlog', async (req, res) => {
   const { userId,reason, permissionKey } = req.body;
 
   if (permissionKey !== process.env.per_key) {
@@ -83,7 +83,7 @@ app.post('/unban-user', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-app.post('/warn-user', async (req, res) => {
+app.post('/warn-userlog', async (req, res) => {
   const { userId,reason, permissionKey } = req.body;
 
   if (permissionKey !== process.env.per_key) {
@@ -98,7 +98,21 @@ app.post('/warn-user', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+app.post('/kick-userlog', async (req, res) => {
+  const { userId,reason, permissionKey } = req.body;
 
+  if (permissionKey !== process.env.per_key) {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
+
+  try {
+    await warnUser(userId,reason);
+    res.json({ success: true, message: 'User kicked successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
 // App start

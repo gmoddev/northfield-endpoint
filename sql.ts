@@ -105,3 +105,15 @@ export async function warnUser(userId: number, reason: string): Promise<void> {
     throw error;
   }
 }
+export async function kickUser(userId: number, reason: string): Promise<void> {
+  try {
+    await createLogsTable();
+  
+    const logQuery = 'INSERT INTO user_logs (user_id, action_type, reason) VALUES (?, ?, ?)';
+    await executeQuery(logQuery, [userId, 'kick', reason]);
+
+  } catch (error) {
+    console.error('Error kicking user:', error);
+    throw error;
+  }
+}

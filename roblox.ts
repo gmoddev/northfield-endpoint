@@ -8,7 +8,7 @@ dotenv.config();
 const robloxCookie = process.env.ROBLOX_COOKIE || '';
 noblox.setCookie(robloxCookie);
 
-export async function rankUpUser(userId: number, group: number, rank: number): Promise<void> {
+export async function robloxrank(userId: number, group: number, rank: number): Promise<void> {
   try {
     await noblox.setRank(group, userId, rank);
   } catch (error) {
@@ -17,7 +17,7 @@ export async function rankUpUser(userId: number, group: number, rank: number): P
   }
 }
 
-export async function kickUser(userId: number, group: number): Promise<void> {
+export async function robloxkick(userId: number, group: number): Promise<void> {
   try {
     await noblox.exile(group, userId);
   } catch (error) {
